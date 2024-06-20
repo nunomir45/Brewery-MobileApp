@@ -12,4 +12,14 @@
     <ItemGroup>
       <ProjectReference Include="..\Brewery.Core\Brewery.Core.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="UI\Adapters\" />
+      <Folder Include="UI\ViewHolders\" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Plugin.CurrentActivity" Version="2.1.0.4" />
+      <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.10" />
+      <PackageReference Include="Xamarin.AndroidX.Core" Version="1.13.1.2" />
+      <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.7.0.2" />
+    </ItemGroup>
 </Project>
