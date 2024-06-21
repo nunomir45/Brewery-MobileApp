@@ -1,8 +1,10 @@
 using Autofac;
+using Brewery.Core.Services.Implementations.Business;
 using Brewery.Core.Services.Implementations.Crossplatform;
 using Brewery.Core.Services.Implementations.WebService;
 using Brewery.Core.Services.Implementations.WebService.BreweryWebServices;
 using Brewery.Core.Services.Implementations.WebService.JSONSerializer;
+using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.CrossPlatform;
 using Brewery.Core.Services.Interfaces.WebService;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
@@ -46,7 +48,7 @@ public class App
     
     private void RegisterServices(ContainerBuilder builder)
     {
-        
+        builder.RegisterType<BreweryService>().As<IBreweryService>().SingleInstance();
     }
     
     private void RegisterRequests(ContainerBuilder builder)

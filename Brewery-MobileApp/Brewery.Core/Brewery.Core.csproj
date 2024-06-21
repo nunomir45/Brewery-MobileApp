@@ -25,6 +25,12 @@
 
     <ItemGroup>
       <None Remove="Services\Implementations\WebService\Security\**" />
+      <None Remove="Services\Implementations\Business\" />
+      <None Remove="Services\Interfaces\Business\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Services\Implementations\Business\" />
+      <Folder Include="Services\Interfaces\Business\" />
+    </ItemGroup>
 </Project>

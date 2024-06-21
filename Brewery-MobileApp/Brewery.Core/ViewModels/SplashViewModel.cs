@@ -1,3 +1,4 @@
+using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 
@@ -6,9 +7,12 @@ namespace Brewery.Core.ViewModels;
 public class SplashViewModel : BaseViewModel
 {
     private readonly IListBreweriesRequest _listBreweriesRequest;
-    public SplashViewModel(IListBreweriesRequest listBreweriesRequest)
+    private readonly IBreweryService _breweryService;
+    
+    public SplashViewModel(IListBreweriesRequest listBreweriesRequest, IBreweryService breweryService)
     {
         _listBreweriesRequest = listBreweriesRequest;
+        _breweryService = breweryService;
         
         Title = "Welcome to the Brewery App!";
     }
@@ -32,35 +36,14 @@ public class SplashViewModel : BaseViewModel
 
     private async Task LoadBreweries()
     {
-        /*try
+        try
         {
-            var response = await _listBreweriesRequest.SendAsync(new ListBreweriesInput());
+            await _breweryService.LoadBreweries();
         }
         catch (Exception e)
         {
             System.Diagnostics.Debug.WriteLine(e.StackTrace);
-        }*/
-        
-        
-        string apiUrl = "https://api.openbrewerydb.org/v1/breweries?per_page=3";
-
-        using (var client = new HttpClient())
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(apiUrl);
-                response.EnsureSuccessStatusCode(); 
-
-                string content = await response.Content.ReadAsStringAsync();
-
-                var breweries = new ListBreweriesOutput(content);
-
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine($"Erro na solicitação: {e.Message}");
-            }
-        }
+        } 
     }
 
     private async Task ShowNextPage()
