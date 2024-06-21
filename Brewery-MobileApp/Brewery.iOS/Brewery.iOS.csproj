@@ -10,6 +10,7 @@
       <ProjectReference Include="..\Brewery.Core\Brewery.Core.csproj" />
     </ItemGroup>
     <ItemGroup>
+      <Folder Include="Services\" />
       <Folder Include="UI\Cells\" />
       <Folder Include="UI\Sources\" />
       <Folder Include="UI\Views\" />
@@ -18,21 +19,26 @@
       <Compile Remove="UI\ViewControllers\BaseViewController\**" />
       <Compile Remove="Helpers\ViewControllerHelper.cs" />
       <Compile Remove="Helpers\**" />
+      <Compile Remove="Services\Crossplatform\**" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="UI\ViewControllers\BaseViewController\**" />
       <EmbeddedResource Remove="Helpers\**" />
+      <EmbeddedResource Remove="Services\Crossplatform\**" />
     </ItemGroup>
     <ItemGroup>
       <ImageAsset Remove="UI\ViewControllers\BaseViewController\**" />
       <ImageAsset Remove="Helpers\**" />
+      <ImageAsset Remove="Services\Crossplatform\**" />
     </ItemGroup>
     <ItemGroup>
       <InterfaceDefinition Remove="UI\ViewControllers\BaseViewController\**" />
       <InterfaceDefinition Remove="Helpers\**" />
+      <InterfaceDefinition Remove="Services\Crossplatform\**" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="UI\ViewControllers\BaseViewController\**" />
       <None Remove="Helpers\**" />
+      <None Remove="Services\Crossplatform\**" />
     </ItemGroup>
 </Project>

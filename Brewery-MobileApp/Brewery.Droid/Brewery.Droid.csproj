@@ -13,6 +13,7 @@
       <ProjectReference Include="..\Brewery.Core\Brewery.Core.csproj" />
     </ItemGroup>
     <ItemGroup>
+      <Folder Include="Services\" />
       <Folder Include="UI\Adapters\" />
       <Folder Include="UI\ViewHolders\" />
     </ItemGroup>
@@ -21,5 +22,29 @@
       <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.10" />
       <PackageReference Include="Xamarin.AndroidX.Core" Version="1.13.1.2" />
       <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.7.0.2" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="Services\Crossplatform\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="Services\Crossplatform\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <TransformFile Remove="Services\Crossplatform\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <AndroidLibrary Remove="Services\Crossplatform\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <AndroidNativeLibrary Remove="Services\Crossplatform\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <JavaSourceJar Remove="Services\Crossplatform\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <AndroidJavaSource Remove="Services\Crossplatform\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Services\Crossplatform\**" />
     </ItemGroup>
 </Project>
