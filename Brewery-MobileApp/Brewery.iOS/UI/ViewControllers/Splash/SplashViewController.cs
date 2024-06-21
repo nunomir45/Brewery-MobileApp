@@ -1,4 +1,5 @@
 using System;
+using Brewery.Core.ViewModels;
 using Brewery.iOS.UI.ViewControllers.Home;
 using UIKit;
 using Foundation;
@@ -7,7 +8,7 @@ using ObjCRuntime;
 namespace Brewery.iOS.UI.ViewControllers.Splash;
 
 [Register("SplashViewController")]
-public partial class SplashViewController : UIViewController
+public partial class SplashViewController : BaseViewController<SplashViewModel>
 {
     public SplashViewController(NativeHandle handle) : base(handle)
     {
@@ -17,21 +18,40 @@ public partial class SplashViewController : UIViewController
     {
         base.ViewDidLoad();
         
-        await Task.Delay(4000);
+        SetupUI();
+    }
 
-        ShowFirstViewController();
+    protected override void SetUpBindings()
+    {
+        if (_viewModel != null)
+        {
+            _viewModel.ShowHome += ShowHome;
+        }
+    }
+
+    protected override void CleanUpBindings()
+    {
+        if (_viewModel != null)
+        {
+            _viewModel.ShowHome -= ShowHome;
+        }
+    }
+
+    #region UI
+
+    private void SetupUI()
+    {
+        SplashTitle.Text = _viewModel.Title;
     }
     
-    private void ShowFirstViewController()
+    #endregion
+    
+    #region Events
+
+    private void ShowHome(object sender, EventArgs e)
     {
-        var storyboard = UIStoryboard.FromName("Home", null);
-        var viewController = storyboard.InstantiateViewController(nameof(HomeViewController));
-        ((MainViewController)ParentViewController)?.Replace(viewController);
+        PushViewController("Home", nameof(HomeViewController));
     }
 
-    public override void DidReceiveMemoryWarning()
-    {
-        base.DidReceiveMemoryWarning();
-        // Release any cached data, images, etc that aren't in use.
-    }
+    #endregion
 }

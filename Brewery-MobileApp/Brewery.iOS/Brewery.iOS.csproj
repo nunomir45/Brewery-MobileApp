@@ -14,4 +14,25 @@
       <Folder Include="UI\Sources\" />
       <Folder Include="UI\Views\" />
     </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="UI\ViewControllers\BaseViewController\**" />
+      <Compile Remove="Helpers\ViewControllerHelper.cs" />
+      <Compile Remove="Helpers\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="UI\ViewControllers\BaseViewController\**" />
+      <EmbeddedResource Remove="Helpers\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <ImageAsset Remove="UI\ViewControllers\BaseViewController\**" />
+      <ImageAsset Remove="Helpers\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <InterfaceDefinition Remove="UI\ViewControllers\BaseViewController\**" />
+      <InterfaceDefinition Remove="Helpers\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="UI\ViewControllers\BaseViewController\**" />
+      <None Remove="Helpers\**" />
+    </ItemGroup>
 </Project>

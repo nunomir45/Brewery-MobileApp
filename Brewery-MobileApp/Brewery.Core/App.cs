@@ -29,7 +29,9 @@ public class App
 
     private void RegisterViewModels(ContainerBuilder builder)
     {
+        builder.RegisterType<SplashViewModel>().InstancePerDependency();
         builder.RegisterType<HomeViewModel>().InstancePerDependency();
+        builder.RegisterType<BreweryDetailViewModel>().InstancePerDependency();
     }
     
     private void RegisterServices(ContainerBuilder builder)
