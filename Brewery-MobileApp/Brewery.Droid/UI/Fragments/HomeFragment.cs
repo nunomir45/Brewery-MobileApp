@@ -33,12 +33,14 @@ public class HomeFragment : BaseFragment
     protected override void SetupBindings()
     {
         _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+        _viewModel.ShowBreweryDetail += ShowBreweryDetail;
         _viewModel.RaisePropertyChanged(nameof(_viewModel.BreweriesList));
     }
 
     protected override void CleanupBindings()
     {
         _viewModel.PropertyChanged -= ViewModelOnPropertyChanged;
+        _viewModel.ShowBreweryDetail -= ShowBreweryDetail;
     }
 
     #region UI
@@ -65,7 +67,13 @@ public class HomeFragment : BaseFragment
 
     private void ItemClick(int position)
     {
-        
+        _viewModel.SelectBrewery(position);
+    }
+    
+    private void ShowBreweryDetail(object sender, EventArgs e)
+    {
+        var breweryFragment = new BreweryDetailFragment();
+        this.ShowNewFragment(breweryFragment, true);
     }
     
     private void ViewModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
