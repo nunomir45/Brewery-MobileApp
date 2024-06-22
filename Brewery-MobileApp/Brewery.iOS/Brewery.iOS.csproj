@@ -25,6 +25,7 @@
       <Compile Remove="Helpers\ViewControllerHelper.cs" />
       <Compile Remove="Helpers\**" />
       <Compile Remove="Services\Crossplatform\**" />
+      <Compile Remove="UI\ViewControllers\MainViewController.cs" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="UI\ViewControllers\BaseViewController\**" />

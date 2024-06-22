@@ -16,33 +16,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWv-Sn-lC2">
-                                <rect key="frame" x="15" y="74" width="363" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VxI-uB-Mqq">
-                                <rect key="frame" x="0.0" y="110" width="393" height="708"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qPL-fi-Wd1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WWv-Sn-lC2" firstAttribute="centerX" secondItem="kPr-5m-wqf" secondAttribute="centerX" id="6vp-oi-reh"/>
-                            <constraint firstItem="qPL-fi-Wd1" firstAttribute="trailing" secondItem="WWv-Sn-lC2" secondAttribute="trailing" constant="15" id="9kQ-Vx-Y1s"/>
+                            <constraint firstItem="VxI-uB-Mqq" firstAttribute="top" secondItem="qPL-fi-Wd1" secondAttribute="top" id="6v6-OI-5aD"/>
                             <constraint firstItem="qPL-fi-Wd1" firstAttribute="trailing" secondItem="VxI-uB-Mqq" secondAttribute="trailing" id="Hm3-Ni-R1x"/>
-                            <constraint firstItem="WWv-Sn-lC2" firstAttribute="leading" secondItem="qPL-fi-Wd1" secondAttribute="leading" constant="15" id="KKT-BY-oED"/>
                             <constraint firstItem="qPL-fi-Wd1" firstAttribute="bottom" secondItem="VxI-uB-Mqq" secondAttribute="bottom" id="Yeu-KP-Vko"/>
                             <constraint firstItem="VxI-uB-Mqq" firstAttribute="leading" secondItem="qPL-fi-Wd1" secondAttribute="leading" id="lPs-OR-6U6"/>
-                            <constraint firstItem="VxI-uB-Mqq" firstAttribute="top" secondItem="WWv-Sn-lC2" secondAttribute="bottom" constant="15" id="oOR-CA-43P"/>
-                            <constraint firstItem="WWv-Sn-lC2" firstAttribute="top" secondItem="qPL-fi-Wd1" secondAttribute="top" constant="15" id="yCp-k6-rkR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="TableView" destination="VxI-uB-Mqq" id="u3m-29-5nx"/>
-                        <outlet property="Title" destination="WWv-Sn-lC2" id="qod-FY-Ivo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ihj-qd-Cqo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

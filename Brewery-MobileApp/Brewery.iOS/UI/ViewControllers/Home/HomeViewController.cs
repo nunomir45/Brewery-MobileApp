@@ -37,7 +37,7 @@ public partial class HomeViewController : BaseViewController<HomeViewModel>, IUI
     
     private void SetUI()
     {
-        Title.Text = "Brewery Application";
+        Title = _viewModel.Title;
         
         TableView.RegisterNibForCellReuse(BreweryCell.Nib, BreweryCell.Key);
         TableView.DataSource = this;

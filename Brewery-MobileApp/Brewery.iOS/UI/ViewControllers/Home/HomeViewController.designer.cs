@@ -15,19 +15,11 @@ namespace Brewery.iOS.UI.ViewControllers.Home
 		[Outlet]
 		UIKit.UITableView TableView { get; set; }
 
-		[Outlet]
-		UIKit.UILabel Title { get; set; }
-
 		void ReleaseDesignerOutlets ()
 		{
 			if (TableView != null) {
 				TableView.Dispose ();
 				TableView = null;
-			}
-
-			if (Title != null) {
-				Title.Dispose ();
-				Title = null;
 			}
 
 		}

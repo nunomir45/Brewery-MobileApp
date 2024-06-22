@@ -157,7 +157,11 @@ public abstract class BaseViewController<T> : BaseViewController where T : BaseV
             {
                 var storyboard = UIStoryboard.FromName(storyboardString, null);
                 var viewController = storyboard.InstantiateViewController(viewControllerName);
-                ((MainViewController)ParentViewController)?.Replace(viewController);
+                
+                if (NavigationController != null)
+                {
+                    NavigationController.PushViewController(viewController, true);
+                }
             });
         }
     }

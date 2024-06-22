@@ -50,7 +50,15 @@ public partial class SplashViewController : BaseViewController<SplashViewModel>
 
     private void ShowHome(object sender, EventArgs e)
     {
-        PushViewController("Home", nameof(HomeViewController));
+        var storyboard = UIStoryboard.FromName("Home", null);
+        var viewController = storyboard.InstantiateViewController(nameof(HomeViewController));
+
+        var navigationController = NavigationController;
+
+        if (navigationController != null)
+        {
+            navigationController.SetViewControllers(new UIViewController[] { viewController }, true);
+        }
     }
 
     #endregion
