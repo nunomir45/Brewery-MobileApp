@@ -45,5 +45,6 @@
       <None Remove="UI\ViewControllers\BaseViewController\**" />
       <None Remove="Helpers\**" />
       <None Remove="Services\Crossplatform\**" />
+      <None Remove="UI\ViewControllers\BreweryDetail\" />
     </ItemGroup>
 </Project>

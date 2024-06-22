@@ -1,26 +1,52 @@
-using System;
-
+﻿using System;
+using Brewery.Core.ViewModels;
+using Brewery.iOS.UI.Cells;
 using UIKit;
 using Foundation;
+using ObjCRuntime;
 
 namespace Brewery.iOS.UI.ViewControllers.BreweryDetail;
 
 [Register("BreweryDetailViewController")]
-public partial class BreweryDetailViewController : UIViewController
+public partial class BreweryDetailViewController : BaseViewController<BreweryDetailViewModel>, IUITableViewDelegate, IUITableViewDataSource
 {
-    public BreweryDetailViewController() : base()
+    public BreweryDetailViewController(NativeHandle handle) : base(handle)
     {
     }
 
     public override void ViewDidLoad()
     {
         base.ViewDidLoad();
-        // Perform any additional setup after loading the view, typically from a nib.
+        SetUI();
     }
 
-    public override void DidReceiveMemoryWarning()
+    protected override void SetUpBindings()
     {
-        base.DidReceiveMemoryWarning();
-        // Release any cached data, images, etc that aren't in use.
+
+    }
+
+    protected override void CleanUpBindings()
+    {
+
+    }
+
+    private void SetUI()
+    {
+        TableView.RegisterNibForCellReuse(BreweryFieldCell.Nib, BreweryFieldCell.Key);
+        TableView.DataSource = this;
+        TableView.Delegate = this;
+    }
+
+    public IntPtr RowsInSection(UITableView tableView, IntPtr section)
+    {
+        return _viewModel.BreweryFields?.Count ?? 0;
+    }
+
+    public UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+    {
+        var breweryItem = _viewModel.BreweryFields.ElementAt(indexPath.Row);
+        var breweryCell = tableView.DequeueReusableCell(nameof(BreweryFieldCell)) as BreweryFieldCell;
+        breweryCell.Configure(breweryItem.Key, breweryItem.Value);
+        return breweryCell;
     }
 }
