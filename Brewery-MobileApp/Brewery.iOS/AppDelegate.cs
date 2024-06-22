@@ -23,14 +23,14 @@ public class AppDelegate : UIApplicationDelegate
             BackgroundColor = UIColor.White
         };
 
-        var vc = UIStoryboard.FromName("Splash", null)
+        var splashViewController = UIStoryboard.FromName("Splash", null)
             .InstantiateInitialViewController();
 
-        var mainController = new MainViewController(vc);
+        var navigationController = new UINavigationController(splashViewController);
 		
         Window.MakeKeyAndVisible();
-        Window.RootViewController = mainController;
-
+        Window.RootViewController = navigationController;
+        
         // make the window visible
         Window.MakeKeyAndVisible ();
 
