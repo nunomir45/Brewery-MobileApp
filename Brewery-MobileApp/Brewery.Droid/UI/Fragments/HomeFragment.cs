@@ -5,13 +5,16 @@ using Brewery.Core;
 using Brewery.Core.ViewModels;
 using AndroidX.RecyclerView.Widget;
 using Brewery.Droid.Helpers;
+using Brewery.Droid.UI.Activities;
 using Brewery.Droid.UI.Adapters;
+using Plugin.CurrentActivity;
 
 namespace Brewery.Droid.UI.Fragments;
 
 public class HomeFragment : BaseFragment
 {
     private HomeViewModel _viewModel;
+    private MainActivity _activity;
     private RecyclerView _breweriesRecyclerView;
     private BreweriesRecyclerViewAdapter _breweriesRecyclerViewAdapter;
     
@@ -27,6 +30,8 @@ public class HomeFragment : BaseFragment
 
         _breweriesRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.breweriesRecyclerView);
 
+        _activity = (MainActivity)CrossCurrentActivity.Current.Activity;
+        
         return view;
     }
 
@@ -35,6 +40,10 @@ public class HomeFragment : BaseFragment
         _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
         _viewModel.ShowBreweryDetail += ShowBreweryDetail;
         _viewModel.RaisePropertyChanged(nameof(_viewModel.BreweriesList));
+        
+        _activity.SetToolbarTitle(_viewModel.Title);
+        _activity.SetToolbarBack(false);
+        _activity.ShowToolbar();
     }
 
     protected override void CleanupBindings()

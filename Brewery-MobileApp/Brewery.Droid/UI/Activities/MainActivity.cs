@@ -1,3 +1,4 @@
+using Android.Views;
 using Brewery.Droid.UI.Fragments;
 using AndroidX.AppCompat.App;
 using Plugin.CurrentActivity;
@@ -38,4 +39,38 @@ public class MainActivity : AppCompatActivity
             fragmentTx.CommitAllowingStateLoss();
         }
     }
+
+    public void ShowToolbar()
+    {
+        SupportActionBar.Show();
+    }
+    
+    public void SetToolbarTitle(string text)
+    {
+        SupportActionBar.Title = text;
+    }
+
+    public void SetToolbarBack(bool hasBack)
+    {
+        SupportActionBar.SetDisplayHomeAsUpEnabled(hasBack);
+    }
+    
+    public override bool OnOptionsItemSelected(IMenuItem item)
+    {
+        if (item.ItemId == Android.Resource.Id.Home)
+        {
+            if (SupportFragmentManager.BackStackEntryCount > 0)
+            {
+                SupportFragmentManager.PopBackStack();
+            }
+            else
+            {
+                Finish();
+            }
+            return true;
+        }
+
+        return base.OnOptionsItemSelected(item);
+    }
+    
 }

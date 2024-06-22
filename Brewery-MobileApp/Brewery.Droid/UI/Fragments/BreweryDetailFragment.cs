@@ -5,13 +5,16 @@ using Autofac;
 using Brewery.Core;
 using Brewery.Core.ViewModels;
 using Brewery.Droid.Helpers;
+using Brewery.Droid.UI.Activities;
 using Brewery.Droid.UI.Adapters;
+using Plugin.CurrentActivity;
 
 namespace Brewery.Droid.UI.Fragments;
 
 public class BreweryDetailFragment : BaseFragment
 {
     private BreweryDetailViewModel _viewModel;
+    private MainActivity _activity;
     private RecyclerView _breweryDetailRecyclerView;
     private BreweryDetailRecyclerViewAdapter _breweryDetailRecyclerViewAdapter;
 
@@ -27,6 +30,10 @@ public class BreweryDetailFragment : BaseFragment
 
         _breweryDetailRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.breweryDetailRecyclerView);
 
+        _activity = (MainActivity)CrossCurrentActivity.Current.Activity;
+        _activity.SetToolbarTitle(_viewModel.BreweryFields["Name"]);
+        
+        
         return view;
     }
     
@@ -34,11 +41,15 @@ public class BreweryDetailFragment : BaseFragment
     {
         _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
         _viewModel.RaisePropertyChanged(nameof(_viewModel.BreweryFields));
+        
+        _activity?.SetToolbarBack(true);
     }
 
     protected override void CleanupBindings()
     {
         _viewModel.PropertyChanged -= ViewModelOnPropertyChanged;
+        
+        _activity?.SetToolbarBack(false);
     }
 
     #region UI

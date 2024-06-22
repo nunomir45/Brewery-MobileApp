@@ -12,6 +12,8 @@ public class HomeViewModel : BaseViewModel
     public HomeViewModel(IBreweryService breweryService)
     {
         _breweryService = breweryService;
+
+        Title = "Breweries list";
     }
     
     #region Bindings
@@ -56,6 +58,6 @@ public class HomeViewModel : BaseViewModel
     
     private void LoadData()
     {
-        BreweriesList = new ObservableCollection<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_breweryService.BreweriesList);
+        BreweriesList = new ObservableCollection<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_breweryService.BreweriesList ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>());
     }
 }
