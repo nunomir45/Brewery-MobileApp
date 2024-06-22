@@ -60,4 +60,9 @@ public static class FragmentHelper
             }
         });
     }
+    
+    public static void RunOnUI(this Fragment fragment, Action action)
+    {
+        fragment?.Activity?.RunOnUiThread(action);
+    }
 }
