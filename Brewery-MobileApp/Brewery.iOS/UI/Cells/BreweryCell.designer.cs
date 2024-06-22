@@ -8,23 +8,16 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace Brewery.iOS.UI.ViewControllers.Home
+namespace Brewery.iOS.UI.Cells
 {
-	partial class HomeViewController
+	[Register ("BreweryCell")]
+	partial class BreweryCell
 	{
-		[Outlet]
-		UIKit.UITableView TableView { get; set; }
-
 		[Outlet]
 		UIKit.UILabel Title { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
-			if (TableView != null) {
-				TableView.Dispose ();
-				TableView = null;
-			}
-
 			if (Title != null) {
 				Title.Dispose ();
 				Title = null;

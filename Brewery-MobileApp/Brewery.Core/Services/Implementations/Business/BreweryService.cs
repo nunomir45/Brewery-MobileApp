@@ -15,7 +15,7 @@ namespace Brewery.Core.Services.Implementations.Business
 
 		public async Task LoadBreweries()
 		{
-			string apiUrl = "https://api.openbrewerydb.org/v1/breweries?per_page=3";
+			string apiUrl = "https://api.openbrewerydb.org/v1/breweries";
 
 			using (var client = new HttpClient())
 			{
