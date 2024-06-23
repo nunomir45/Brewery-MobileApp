@@ -14,32 +14,21 @@ public class HomeViewModel : BaseViewModel
         _breweryService = breweryService;
 
         Title = "Breweries list";
+        
+        LoadData();
     }
     
     #region Bindings
 
     public string Title { get; set; }
-    
-    private ObservableCollection<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery> _breweriesList;
-    
-    public ObservableCollection<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery> BreweriesList
-    {
-        get { return _breweriesList; }
-        set
-        {
-            if (_breweriesList != value)
-            {
-                _breweriesList = value;
-                RaisePropertyChanged(nameof(BreweriesList));
-            }
-        }
-    }
+
+    public List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery> BreweriesList { get;set; }
+    public List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery> BreweriesFilteredList { get;set; }
 
     #endregion
     
     public override void Appearing()
     {
-        LoadData();
     }
 
     public override void Disappearing()
@@ -58,6 +47,7 @@ public class HomeViewModel : BaseViewModel
     
     private void LoadData()
     {
-        BreweriesList = new ObservableCollection<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_breweryService.BreweriesList ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>());
+        BreweriesList = new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_breweryService.BreweriesList ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>());
+        BreweriesFilteredList = new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_breweryService.BreweriesList ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>());
     }
 }

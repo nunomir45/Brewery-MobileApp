@@ -13,6 +13,9 @@ namespace Brewery.iOS.UI.ViewControllers.Home
 	partial class HomeViewController
 	{
 		[Outlet]
+		UIKit.UISearchBar SearchBar { get; set; }
+
+		[Outlet]
 		UIKit.UITableView TableView { get; set; }
 
 		void ReleaseDesignerOutlets ()
@@ -20,6 +23,11 @@ namespace Brewery.iOS.UI.ViewControllers.Home
 			if (TableView != null) {
 				TableView.Dispose ();
 				TableView = null;
+			}
+
+			if (SearchBar != null) {
+				SearchBar.Dispose ();
+				SearchBar = null;
 			}
 
 		}
