@@ -16,36 +16,46 @@
       <ProjectReference Include="..\Brewery.Core\Brewery.Core.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Services\" />
-      <Folder Include="UI\Sources\" />
-      <Folder Include="UI\Views\" />
-    </ItemGroup>
-    <ItemGroup>
       <Compile Remove="UI\ViewControllers\BaseViewController\**" />
       <Compile Remove="Helpers\ViewControllerHelper.cs" />
       <Compile Remove="Helpers\**" />
       <Compile Remove="Services\Crossplatform\**" />
       <Compile Remove="UI\ViewControllers\MainViewController.cs" />
+      <Compile Remove="Services\**" />
+      <Compile Remove="UI\Sources\**" />
+      <Compile Remove="UI\Views\**" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="UI\ViewControllers\BaseViewController\**" />
       <EmbeddedResource Remove="Helpers\**" />
       <EmbeddedResource Remove="Services\Crossplatform\**" />
+      <EmbeddedResource Remove="Services\**" />
+      <EmbeddedResource Remove="UI\Sources\**" />
+      <EmbeddedResource Remove="UI\Views\**" />
     </ItemGroup>
     <ItemGroup>
       <ImageAsset Remove="UI\ViewControllers\BaseViewController\**" />
       <ImageAsset Remove="Helpers\**" />
       <ImageAsset Remove="Services\Crossplatform\**" />
+      <ImageAsset Remove="Services\**" />
+      <ImageAsset Remove="UI\Sources\**" />
+      <ImageAsset Remove="UI\Views\**" />
     </ItemGroup>
     <ItemGroup>
       <InterfaceDefinition Remove="UI\ViewControllers\BaseViewController\**" />
       <InterfaceDefinition Remove="Helpers\**" />
       <InterfaceDefinition Remove="Services\Crossplatform\**" />
+      <InterfaceDefinition Remove="Services\**" />
+      <InterfaceDefinition Remove="UI\Sources\**" />
+      <InterfaceDefinition Remove="UI\Views\**" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="UI\ViewControllers\BaseViewController\**" />
       <None Remove="Helpers\**" />
       <None Remove="Services\Crossplatform\**" />
       <None Remove="UI\ViewControllers\BreweryDetail\" />
+      <None Remove="Services\**" />
+      <None Remove="UI\Sources\**" />
+      <None Remove="UI\Views\**" />
     </ItemGroup>
 </Project>

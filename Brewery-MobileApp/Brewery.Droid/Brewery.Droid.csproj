@@ -13,9 +13,6 @@
       <ProjectReference Include="..\Brewery.Core\Brewery.Core.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Services\" />
-    </ItemGroup>
-    <ItemGroup>
       <PackageReference Include="Plugin.CurrentActivity" Version="2.1.0.4" />
       <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.10" />
       <PackageReference Include="Xamarin.AndroidX.Core" Version="1.13.1.2" />
@@ -24,26 +21,34 @@
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="Services\Crossplatform\**" />
+      <Compile Remove="Services\**" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="Services\Crossplatform\**" />
+      <EmbeddedResource Remove="Services\**" />
     </ItemGroup>
     <ItemGroup>
       <TransformFile Remove="Services\Crossplatform\**" />
+      <TransformFile Remove="Services\**" />
     </ItemGroup>
     <ItemGroup>
       <AndroidLibrary Remove="Services\Crossplatform\**" />
+      <AndroidLibrary Remove="Services\**" />
     </ItemGroup>
     <ItemGroup>
       <AndroidNativeLibrary Remove="Services\Crossplatform\**" />
+      <AndroidNativeLibrary Remove="Services\**" />
     </ItemGroup>
     <ItemGroup>
       <JavaSourceJar Remove="Services\Crossplatform\**" />
+      <JavaSourceJar Remove="Services\**" />
     </ItemGroup>
     <ItemGroup>
       <AndroidJavaSource Remove="Services\Crossplatform\**" />
+      <AndroidJavaSource Remove="Services\**" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="Services\Crossplatform\**" />
+      <None Remove="Services\**" />
     </ItemGroup>
 </Project>

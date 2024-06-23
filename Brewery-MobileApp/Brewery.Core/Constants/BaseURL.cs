@@ -1,4 +1,4 @@
-namespace Brewery.Core.Models;
+namespace Brewery.Core.Constants;
 
 public static class BaseURL
 {

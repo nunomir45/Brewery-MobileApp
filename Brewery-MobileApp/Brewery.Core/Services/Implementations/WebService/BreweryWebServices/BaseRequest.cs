@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Brewery.Core.Models;
+using Brewery.Core.Constants;
 using Brewery.Core.Services.Interfaces.CrossPlatform;
 using Brewery.Core.Services.Interfaces.WebService;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;

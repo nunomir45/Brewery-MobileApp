@@ -4,6 +4,8 @@
 
 This mobile application is developed **for Android and iOS** platforms <u>using .NET</u>. The application consumes the **OpenBreweryDB API** to <u>list breweries</u> and display detailed information about each brewery. The API endpoint used is https://api.openbrewerydb.org/v1/breweries.
 
+![highlevelworkflow](DocumentationAssets/Breweries_list.png) ![highlevelworkflow](DocumentationAssets/Breweries_detail.png)
+
 ## 2. Requirements
 
 ### Software Requirements
@@ -34,3 +36,35 @@ This mobile application is developed **for Android and iOS** platforms <u>using 
 
 - **Brewery Listing:** The application makes a GET request to https://api.openbrewerydb.org/v1/breweries and displays the list of breweries.
 - **Brewery Details:** By selecting a brewery, the application displays detailed information about the selected brewery.
+
+## 5. Project structure
+
+
+Brewery-MobileApp/
+│
+├── Brewery-MobileApp/
+│ ├── <u>Brewery.Core</u>/ # Shared code
+│ │ ├── Constants/ # Constants files
+│ │ ├── ViewModels/ # Business logic
+│ │ └── Services/ # Services (Including API calls)
+│ ├── <u>Brewery.Droid</u>/ # Project Android
+│ │ ├── Resources/ # Images and layouts
+│ │ ├── UI/ # UI logic goes here
+│ │ │ ├── Activities/
+│ │ │ ├── Adapters/
+│ │ │ ├── Fragments/
+│ │ │ ├── ViewHolders/ # ViewHolders from Adapters
+│ ├── <u>Brewery.iOS</u>/ # Project iOS
+│ │ ├── UI/ # UI logic goes here
+│ │ │ ├── Cells/ # Cells from UITableViews
+│ │ │ ├── ViewController/ #ViewControllers
+│
+├── DocumentationAssets
+├── README.md # Documentation
+└── .gitignore
+
+
+## 6. References
+
+- [.NET Android and .NET iOS](https://dotnet.microsoft.com/en-us/apps/mobile) 
+- [OpenBreweryDB API Documentation](https://openbrewerydb.org)
