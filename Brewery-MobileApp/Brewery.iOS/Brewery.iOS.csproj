@@ -24,6 +24,7 @@
       <Compile Remove="Services\**" />
       <Compile Remove="UI\Sources\**" />
       <Compile Remove="UI\Views\**" />
+      <Compile Include="Helpers\LabelHelper.cs" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="UI\ViewControllers\BaseViewController\**" />

@@ -13,7 +13,7 @@ public class SplashFragment : BaseFragment
     private SplashViewModel _viewModel;
     private MainActivity _activity;
     
-    private TextView _title;
+    private TextView _titleTv;
     
     public override List<BaseViewModel> CreateViewModels()
     {
@@ -25,7 +25,7 @@ public class SplashFragment : BaseFragment
     {
         var view = inflater.Inflate(Resource.Layout.Splash, container, false);
 
-        _title = view.FindViewById<TextView>(Resource.Id.title);
+        _titleTv = view.FindViewById<TextView>(Resource.Id.title);
         
         _activity = (MainActivity)CrossCurrentActivity.Current.Activity;
         _activity.HideToolbar();
@@ -69,7 +69,7 @@ public class SplashFragment : BaseFragment
 
     private void SetupUI()
     {
-        _title.Text = _viewModel.Title;
+        _titleTv.Text = _viewModel.Title;
     }
     
     #endregion

@@ -5,12 +5,12 @@ namespace Brewery.Droid.UI.ViewHolders;
 
 public class BreweryViewHolder : RecyclerView.ViewHolder
 {
-    private TextView _title { get; set; }
+    private TextView _titleTv { get; set; }
     public Action<int> ItemClick { get; set; }
     
     public BreweryViewHolder(View itemView) : base(itemView)
     {
-        _title = itemView.FindViewById<TextView>(Resource.Id.title);
+        _titleTv = itemView.FindViewById<TextView>(Resource.Id.title);
 
         itemView.Click -= ItemViewOnClick;
         itemView.Click += ItemViewOnClick;
@@ -23,7 +23,7 @@ public class BreweryViewHolder : RecyclerView.ViewHolder
 
     public void Bind(string text)
     {
-        _title.Text = text;
+        _titleTv.Text = text;
     }
 
 }

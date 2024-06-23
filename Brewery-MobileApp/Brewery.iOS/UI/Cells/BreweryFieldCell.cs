@@ -1,4 +1,8 @@
-﻿namespace Brewery.iOS.UI.Cells;
+﻿using System.Diagnostics;
+using Brewery.Core.Helpers;
+using Brewery.iOS.Helpers;
+
+namespace Brewery.iOS.UI.Cells;
 
 public partial class BreweryFieldCell : UITableViewCell
 {
@@ -18,6 +22,26 @@ public partial class BreweryFieldCell : UITableViewCell
 	{
 		Title.Text = title;
 		Value.Text = value;
+
+		if (value.IsUrl())
+		{
+			Value.ApplyUrlFormat(Value.Text);
+			
+			Value.AddGestureRecognizer(new UITapGestureRecognizer(() =>
+			{
+				//WebviewHelper.OpenUri(Value.Text);
+				var url = new NSUrl(Value.Text);
+				
+				if (UIApplication.SharedApplication.CanOpenUrl(url))
+				{
+					UIApplication.SharedApplication.OpenUrl(url);
+				}
+				else
+				{
+					Debug.WriteLine($"It's not possible t open URL: {url}");
+				}
+			}));
+		}
 	}
 }
 
