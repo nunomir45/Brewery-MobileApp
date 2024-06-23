@@ -1,4 +1,4 @@
-# Documentation for .NET Android and .NET iOS Application for OpenBreweryDB
+# .NET Android and .NET iOS Application for OpenBreweryDB
 
 ## 1. Overview
 
