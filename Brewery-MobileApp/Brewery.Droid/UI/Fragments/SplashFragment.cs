@@ -3,12 +3,15 @@ using Autofac;
 using Brewery.Core;
 using Brewery.Core.ViewModels;
 using Brewery.Droid.Helpers;
+using Brewery.Droid.UI.Activities;
+using Plugin.CurrentActivity;
 
 namespace Brewery.Droid.UI.Fragments;
 
 public class SplashFragment : BaseFragment
 {
-    private SplashViewModel _viewModel { get; set; }
+    private SplashViewModel _viewModel;
+    private MainActivity _activity;
     
     private TextView _title;
     
@@ -23,7 +26,10 @@ public class SplashFragment : BaseFragment
         var view = inflater.Inflate(Resource.Layout.Splash, container, false);
 
         _title = view.FindViewById<TextView>(Resource.Id.title);
-
+        
+        _activity = (MainActivity)CrossCurrentActivity.Current.Activity;
+        _activity.HideToolbar();
+        
         SetupUI();
         
         return view;
@@ -37,7 +43,6 @@ public class SplashFragment : BaseFragment
     public override void OnPause()
     {
         base.OnPause();
-        Activity.Window.ClearFlags(WindowManagerFlags.Fullscreen);
     }
 
     protected override void SetupBindings()

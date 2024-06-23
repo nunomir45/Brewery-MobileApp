@@ -15,6 +15,7 @@ public class HomeFragment : BaseFragment
 {
     private HomeViewModel _viewModel;
     private MainActivity _activity;
+    private SearchView _searchView;
     private RecyclerView _breweriesRecyclerView;
     private BreweriesRecyclerViewAdapter _breweriesRecyclerViewAdapter;
     
@@ -29,6 +30,7 @@ public class HomeFragment : BaseFragment
         var view = inflater.Inflate(Resource.Layout.Home, container, false);
 
         _breweriesRecyclerView = view.FindViewById<RecyclerView>(Resource.Id.breweriesRecyclerView);
+        _searchView = view.FindViewById<SearchView>(Resource.Id.searchView);
 
         _activity = (MainActivity)CrossCurrentActivity.Current.Activity;
         
@@ -37,9 +39,14 @@ public class HomeFragment : BaseFragment
 
     protected override void SetupBindings()
     {
-        _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
-        _viewModel.ShowBreweryDetail += ShowBreweryDetail;
-        _viewModel.RaisePropertyChanged(nameof(_viewModel.BreweriesList));
+        if (_viewModel != null)
+        {
+            _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+            _viewModel.ShowBreweryDetail += ShowBreweryDetail;
+            _viewModel.RaisePropertyChanged(nameof(_viewModel.BreweriesList));
+        }
+        
+        _searchView.QueryTextChange += SearchViewOnQueryTextChange;
         
         _activity.SetToolbarTitle(_viewModel.Title);
         _activity.SetToolbarBack(false);
@@ -48,8 +55,13 @@ public class HomeFragment : BaseFragment
 
     protected override void CleanupBindings()
     {
-        _viewModel.PropertyChanged -= ViewModelOnPropertyChanged;
-        _viewModel.ShowBreweryDetail -= ShowBreweryDetail;
+        if (_viewModel != null)
+        {
+            _viewModel.PropertyChanged -= ViewModelOnPropertyChanged;
+            _viewModel.ShowBreweryDetail -= ShowBreweryDetail;
+        }
+        
+        _searchView.QueryTextChange -= SearchViewOnQueryTextChange;
     }
 
     #region UI
@@ -66,6 +78,8 @@ public class HomeFragment : BaseFragment
 
             _breweriesRecyclerView.SetAdapter(_breweriesRecyclerViewAdapter);
             _breweriesRecyclerViewAdapter.NotifyDataSetChanged();
+            
+            _breweriesRecyclerView.AddOnScrollListener(new RecyclerViewOnScrollListener(CrossCurrentActivity.Current.Activity as MainActivity));
         }
     }
     
@@ -94,6 +108,45 @@ public class HomeFragment : BaseFragment
                 SetBreweriesRecyclerView();
             }
         });
+    }
+    
+    private void SearchViewOnQueryTextChange(object? sender, SearchView.QueryTextChangeEventArgs e)
+    {
+        var searchText = e.NewText?.ToLower();
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            _viewModel.BreweriesFilteredList = _viewModel.BreweriesList;
+        }
+        else
+        {
+            _viewModel.BreweriesFilteredList = _viewModel.BreweriesList.Where(item => item.Name.ToLower().Contains(searchText) || item.Name.ToLower().Contains(searchText)).ToList();
+        }
+        
+        _breweriesRecyclerViewAdapter.Breweries = _viewModel.BreweriesFilteredList;
+        _breweriesRecyclerViewAdapter.NotifyDataSetChanged();
+    }
+    
+    #endregion
+
+    #region RecyclerView
+
+    private class RecyclerViewOnScrollListener : RecyclerView.OnScrollListener
+    {
+        private readonly MainActivity activity;
+
+        public RecyclerViewOnScrollListener(MainActivity activity)
+        {
+            this.activity = activity;
+        }
+
+        public override void OnScrollStateChanged(RecyclerView recyclerView, int newState)
+        {
+            if (newState == RecyclerView.ScrollStateDragging)
+            {
+                activity.HideKeyboard();
+            }
+            base.OnScrollStateChanged(recyclerView, newState);
+        }
     }
 
     #endregion

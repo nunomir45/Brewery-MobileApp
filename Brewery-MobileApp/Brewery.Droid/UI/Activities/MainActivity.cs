@@ -1,4 +1,5 @@
 using Android.Views;
+using Android.Views.InputMethods;
 using Brewery.Droid.UI.Fragments;
 using AndroidX.AppCompat.App;
 using Plugin.CurrentActivity;
@@ -8,8 +9,6 @@ namespace Brewery.Droid.UI.Activities;
 [Activity(Label = "@string/app_name", MainLauncher = true)]
 public class MainActivity : AppCompatActivity
 {
-    public string InitialFragment { get; set; }
-    
     private Bundle _savedInstanceState;
     
     protected override void OnCreate(Bundle? savedInstanceState)
@@ -45,6 +44,11 @@ public class MainActivity : AppCompatActivity
         SupportActionBar.Show();
     }
     
+    public void HideToolbar()
+    {
+        SupportActionBar.Hide();
+    }
+    
     public void SetToolbarTitle(string text)
     {
         SupportActionBar.Title = text;
@@ -55,6 +59,16 @@ public class MainActivity : AppCompatActivity
         SupportActionBar.SetDisplayHomeAsUpEnabled(hasBack);
     }
     
+    public void HideKeyboard()
+    {
+        var inputMethodManager = (InputMethodManager)GetSystemService(InputMethodService);
+        var currentFocus = CurrentFocus;
+        if (currentFocus != null)
+        {
+            inputMethodManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
+        }
+    }
+
     public override bool OnOptionsItemSelected(IMenuItem item)
     {
         if (item.ItemId == Android.Resource.Id.Home)
@@ -72,5 +86,4 @@ public class MainActivity : AppCompatActivity
 
         return base.OnOptionsItemSelected(item);
     }
-    
 }
