@@ -32,8 +32,9 @@ public class BreweryDetailViewModel : BaseViewModel
         
         foreach (var property in properties)
         {
+            var brewerySelected = _breweryService.GetBrewerySelected();
             // Get propertie value
-            var value = property.GetValue(_breweryService.BrewerySelected);
+            var value = property.GetValue(brewerySelected);
 
             if (value != null)
             {

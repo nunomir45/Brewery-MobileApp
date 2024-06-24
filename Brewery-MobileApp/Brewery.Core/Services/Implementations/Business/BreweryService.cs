@@ -1,25 +1,22 @@
-﻿using Brewery.Core.Services.Interfaces.Business;
+﻿using DTOs = Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
+using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 
 namespace Brewery.Core.Services.Implementations.Business
 {
 	public class BreweryService : IBreweryService
 	{
-		public List<Interfaces.WebService.BreweryWebServices.DTOs.Brewery> BreweriesList { get; set; }
-		public Interfaces.WebService.BreweryWebServices.DTOs.Brewery BrewerySelected { get; set; }
-
-		public BreweryService()
-		{
-		}
+		private List<DTOs.Brewery> _breweriesList;
+		private DTOs.Brewery _brewerySelected;
 
 		public void SelectBrewery(int position)
 		{
-			if (position < BreweriesList?.Count())
+			if (position < _breweriesList?.Count())
 			{
-				BrewerySelected = BreweriesList[position];
+				_brewerySelected = _breweriesList[position];
 			}
 		}
-		
+
 		public async Task LoadBreweries()
 		{
 			string apiUrl = "https://api.openbrewerydb.org/v1/breweries";
@@ -34,7 +31,7 @@ namespace Brewery.Core.Services.Implementations.Business
 					string content = await response.Content.ReadAsStringAsync();
 
 					var breweries = new ListBreweriesOutput(content);
-					BreweriesList = new List<Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(breweries.DataList);
+					_breweriesList = new List<Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(breweries.DataList);
 				}
 				catch (HttpRequestException e)
 				{
@@ -42,6 +39,20 @@ namespace Brewery.Core.Services.Implementations.Business
 				}
 			}
 		}
+		
+		#region GetsAndSets
+		
+		public List<DTOs.Brewery> GetBreweriesList()
+		{
+			return _breweriesList;
+		}
+
+		public DTOs.Brewery GetBrewerySelected()
+		{
+			return _brewerySelected;
+		} 
+		
+		#endregion
 	}
 }
 

@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewery.iOS", "Brewery.iOS\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewery.Droid", "Brewery.Droid\Brewery.Droid.csproj", "{EB2EDC94-3259-4970-9AE6-83B8C9E48892}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewery.Core.Tests", "Brewery.Core.Tests\Brewery.Core.Tests.csproj", "{8C711357-DA6E-4A32-AA1C-05F45E5B5C3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EB2EDC94-3259-4970-9AE6-83B8C9E48892}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB2EDC94-3259-4970-9AE6-83B8C9E48892}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB2EDC94-3259-4970-9AE6-83B8C9E48892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C711357-DA6E-4A32-AA1C-05F45E5B5C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C711357-DA6E-4A32-AA1C-05F45E5B5C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C711357-DA6E-4A32-AA1C-05F45E5B5C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C711357-DA6E-4A32-AA1C-05F45E5B5C3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

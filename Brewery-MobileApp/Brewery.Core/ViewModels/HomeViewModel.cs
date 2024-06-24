@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+using DTOs = Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 using Brewery.Core.Services.Interfaces.Business;
 
 namespace Brewery.Core.ViewModels;
@@ -39,7 +39,7 @@ public class HomeViewModel : BaseViewModel
     {
         _breweryService.SelectBrewery(position);
         
-        if (_breweryService.BrewerySelected != null)
+        if (_breweryService.GetBrewerySelected() != null)
         {
             ShowBreweryDetail?.Invoke(null, EventArgs.Empty);
         }
@@ -47,7 +47,8 @@ public class HomeViewModel : BaseViewModel
     
     private void LoadData()
     {
-        BreweriesList = new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_breweryService.BreweriesList ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>());
-        BreweriesFilteredList = new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_breweryService.BreweriesList ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>());
+        var breweriesList = _breweryService.GetBreweriesList() ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>();
+        BreweriesList = new List<DTOs.Brewery>(breweriesList);
+        BreweriesFilteredList = new List<DTOs.Brewery>(breweriesList);
     }
 }
