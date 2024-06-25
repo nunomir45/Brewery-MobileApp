@@ -22,7 +22,8 @@ public abstract class BaseRequest<TInput, TOutput>
     protected readonly IHttpRequestMessageBuilder HttpRequestMessageBuilder;
     
     protected abstract string BsWebMethod { get; }
-    
+    protected abstract bool IsListOutput { get; }
+        
     public BaseRequest(IWebServiceRequester requester,
         IDeserializer deserializer,
         IHttpClientService httpClientService,
@@ -38,9 +39,7 @@ public abstract class BaseRequest<TInput, TOutput>
         HttpRequestMessageBuilder = httpRequestMessageBuilder;
     }
     
-    protected async virtual Task<Response<TOutput>> SendAsync(TInput input,
-        HttpMethod httpMethod,
-        int retries = 3)
+    protected async virtual Task<Response<TOutput>> SendAsync(TInput input, HttpMethod httpMethod, int retries = 3)
     {
         try
         {
@@ -91,7 +90,7 @@ public abstract class BaseRequest<TInput, TOutput>
 
             return await retryPolicyNeedsTrueResponse.ExecuteAsync(async () =>
             {
-                var response = await Requester.RequestAsync<TOutput>(client, uri, requestMessage, deserializer).ConfigureAwait(false);
+                var response = await Requester.RequestAsync<TOutput>(client, uri, requestMessage, deserializer, IsListOutput).ConfigureAwait(false);
                 Debug.WriteLine(response.Error?.Message);
                 return response;
             });

@@ -14,6 +14,7 @@ public class ListBreweriesRequest : BaseRequest<ListBreweriesInput, ListBrewerie
     }
 
     protected override string BsWebMethod => "/v1/breweries";
+    protected override bool IsListOutput => true;
 
     public Task<Response<ListBreweriesOutput>> SendAsync(ListBreweriesInput input)
     {
