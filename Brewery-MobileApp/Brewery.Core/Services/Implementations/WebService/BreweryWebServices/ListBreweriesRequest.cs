@@ -13,7 +13,7 @@ public class ListBreweriesRequest : BaseRequest<ListBreweriesInput, ListBrewerie
     {
     }
 
-    protected override string BsWebMethod => "/v1/breweries?per_page=3";
+    protected override string BsWebMethod => "/v1/breweries";
 
     public Task<Response<ListBreweriesOutput>> SendAsync(ListBreweriesInput input)
     {

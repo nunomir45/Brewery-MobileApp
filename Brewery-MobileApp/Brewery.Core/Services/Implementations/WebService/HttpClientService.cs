@@ -1,5 +1,9 @@
 
+using System.Diagnostics;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using Brewery.Core.Constants;
 using Brewery.Core.Services.Interfaces.WebService;
 using ModernHttpClient;
 
@@ -9,15 +13,11 @@ public class HttpClientService : IHttpClientService
 {
     private readonly HttpClient _defaultClient;
 
-
     public HttpClientService()
     {
-        ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+        var nativeHandler = new HttpClientHandler();
+        nativeHandler.ServerCertificateCustomValidationCallback += ValidatePubKey;
 
-        var nativeHandler = new NativeMessageHandler(
-            throwOnCaptiveNetwork: true,
-            tLSConfig: new TLSConfig()
-        );
         _defaultClient = new HttpClient(nativeHandler);
         _defaultClient.Timeout = TimeSpan.FromMinutes(1);
     }
@@ -25,5 +25,20 @@ public class HttpClientService : IHttpClientService
     public HttpClient GetClient(string client = null)
     {
         return _defaultClient;
+    }
+    
+    private bool ValidatePubKey(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+    {
+        var publicKey = certificate?.GetPublicKeyString();
+
+        bool isValid = CertificatePinningKeys.AllowedPublicKeys?.ContainsValue(publicKey) ?? false;
+        
+        if (!isValid)
+        {
+            Debug.WriteLine("Validate public key FAILED!");
+            Debug.WriteLine($"{publicKey} not authorized.", true);
+        }
+
+        return true;
     }
 }

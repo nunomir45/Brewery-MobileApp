@@ -1,14 +1,23 @@
-﻿using DTOs = Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
+﻿using System.Diagnostics;
+using DTOs = Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 using Brewery.Core.Services.Interfaces.Business;
+using Brewery.Core.Services.Interfaces.WebService;
+using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 
 namespace Brewery.Core.Services.Implementations.Business
 {
 	public class BreweryService : IBreweryService
 	{
+		private readonly IListBreweriesRequest _listBreweriesRequest;
 		private List<DTOs.Brewery> _breweriesList;
 		private DTOs.Brewery _brewerySelected;
 
+		public BreweryService(IListBreweriesRequest listBreweriesRequest)
+		{
+			_listBreweriesRequest = listBreweriesRequest;
+		}
+		
 		public void SelectBrewery(int position)
 		{
 			if (position < _breweriesList?.Count())
@@ -19,24 +28,14 @@ namespace Brewery.Core.Services.Implementations.Business
 
 		public async Task LoadBreweries()
 		{
-			string apiUrl = "https://api.openbrewerydb.org/v1/breweries";
-
-			using (var client = new HttpClient())
+			try
 			{
-				try
-				{
-					HttpResponseMessage response = await client.GetAsync(apiUrl);
-					response.EnsureSuccessStatusCode(); 
-
-					string content = await response.Content.ReadAsStringAsync();
-
-					var breweries = new ListBreweriesOutput(content);
-					_breweriesList = new List<Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(breweries.DataList);
-				}
-				catch (HttpRequestException e)
-				{
-					Console.WriteLine($"Erro na solicitação: {e.Message}");
-				}
+				var response = await _listBreweriesRequest.SendAsync(new ListBreweriesInput());
+				_breweriesList = new List<Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(response.Data.DataList);
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine(e.StackTrace);
 			}
 		}
 		
