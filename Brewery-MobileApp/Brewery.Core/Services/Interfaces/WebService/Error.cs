@@ -6,9 +6,6 @@ public class Error
     {
         Message = message;
     }
-
-    public Error(Exception ex) : this(ex.Message) { }
-
-    public static Error Empty { get; internal set; } = new Error("Empty Message");
+    
     public virtual string Message { get; private set; }
 }

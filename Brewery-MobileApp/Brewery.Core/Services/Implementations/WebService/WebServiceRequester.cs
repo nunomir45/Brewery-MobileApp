@@ -8,38 +8,44 @@ public class WebServiceRequester : IWebServiceRequester
     public async Task<Response<TObject>> RequestAsync<TObject>(HttpClient client,
         Uri uri,
         HttpRequestMessage httpRequestMessage,
-        IDeserializer deserializer,
-        bool checkStatusCode = true)
+        IDeserializer deserializer, bool isListOutput = false)
     {
         TObject returnObject = default(TObject);
 
         try
         {
-#if DEBUG
-            System.Diagnostics.Debug.WriteLine($"uri {uri}");
-            System.Diagnostics.Debug.WriteLine($"headers {httpRequestMessage.Headers}");
-#endif
+            Debug.WriteLine($"uri {uri}");
+            Debug.WriteLine($"headers {httpRequestMessage.Headers}");
+
             var request = GetRequestMessage(httpRequestMessage); 
 
             using (var response = await client.SendAsync(request).ConfigureAwait(false))
             {
-#if DEBUG
-                System.Diagnostics.Debug.WriteLine(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-#endif
-                if (checkStatusCode)
-                    response.EnsureSuccessStatusCode(); // throws an exception if the status code is unsuccessfull
-                if (response.IsSuccessStatusCode || !checkStatusCode)
+                Debug.WriteLine("Response:");
+                Debug.WriteLine(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+
+                response.EnsureSuccessStatusCode(); // throws an exception if the status code is unsuccessfull
+                    
+                if (response.IsSuccessStatusCode)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                    // Works for BaseListOutput
-                    var constructor = typeof(TObject).GetConstructor(new[] { typeof(string) });
-                    if (constructor != null)
+                    if (!isListOutput)
                     {
-                        returnObject = (TObject)constructor.Invoke(new object[] { responseContent });
+                        var responseObj = deserializer.DeserializeAsync<TObject>(response.Content);
+                        return new Response<TObject>(returnObject);
                     }
+                    else
+                    {
+                        // Works for BaseListOutput
+                        var constructor = typeof(TObject).GetConstructor(new[] { typeof(string) });
+                        if (constructor != null)
+                        {
+                            returnObject = (TObject)constructor.Invoke(new object[] { responseContent });
+                        }
                     
-                    return new Response<TObject>(returnObject);
+                        return new Response<TObject>(returnObject);
+                    }
                 }
             }
         }
