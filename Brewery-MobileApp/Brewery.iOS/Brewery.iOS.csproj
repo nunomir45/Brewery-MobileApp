@@ -26,6 +26,7 @@
       <Compile Remove="UI\Views\**" />
       <Compile Include="Helpers\LabelHelper.cs" />
       <Compile Include="Services\DialogService.cs" />
+      <Compile Remove="SceneDelegate.cs" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="UI\ViewControllers\BaseViewController\**" />
@@ -50,6 +51,8 @@
       <InterfaceDefinition Remove="Services\**" />
       <InterfaceDefinition Remove="UI\Sources\**" />
       <InterfaceDefinition Remove="UI\Views\**" />
+      <InterfaceDefinition Remove="LaunchScreen.storyboard" />
+      <InterfaceDefinition Remove="Resources\LaunchScreen.xib" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="UI\ViewControllers\BaseViewController\**" />
@@ -59,5 +62,8 @@
       <None Remove="Services\**" />
       <None Remove="UI\Sources\**" />
       <None Remove="UI\Views\**" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Resources\" />
     </ItemGroup>
 </Project>
