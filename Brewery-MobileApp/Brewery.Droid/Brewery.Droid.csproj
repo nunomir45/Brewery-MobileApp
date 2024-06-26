@@ -22,6 +22,7 @@
     <ItemGroup>
       <Compile Remove="Services\Crossplatform\**" />
       <Compile Remove="Services\**" />
+      <Compile Include="Services\DialogService.cs" />
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="Services\Crossplatform\**" />

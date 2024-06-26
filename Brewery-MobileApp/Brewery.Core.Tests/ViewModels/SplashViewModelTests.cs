@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Brewery.Core.Services.Interfaces.Business;
+using Brewery.Core.Services.Interfaces.CrossPlatform;
+using Brewery.Core.Services.Interfaces.WebService;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 using Brewery.Core.ViewModels;
@@ -14,6 +16,7 @@ namespace Brewery.Core.Tests.ViewModels
     {
         private Mock<IListBreweriesRequest> _mockListBreweriesRequest;
         private Mock<IBreweryService> _mockBreweryService;
+        private Mock<IDialogService> _mockDialogService;
         private SplashViewModel _viewModel;
 
         [TestInitialize]
@@ -21,7 +24,8 @@ namespace Brewery.Core.Tests.ViewModels
         {
             _mockListBreweriesRequest = new Mock<IListBreweriesRequest>();
             _mockBreweryService = new Mock<IBreweryService>();
-            _viewModel = new SplashViewModel(_mockListBreweriesRequest.Object, _mockBreweryService.Object);
+            _mockDialogService = new Mock<IDialogService>();
+            _viewModel = new SplashViewModel(_mockListBreweriesRequest.Object, _mockBreweryService.Object, _mockDialogService.Object);
         }
 
         [TestMethod]
@@ -35,7 +39,7 @@ namespace Brewery.Core.Tests.ViewModels
         public async Task ShouldCall_LoadBreweries_OnAppearing()
         {
             // Arrange
-            _mockBreweryService.Setup(service => service.LoadBreweries()).Returns(Task.CompletedTask).Verifiable();
+            _mockBreweryService.Setup(service => service.LoadBreweries()).Returns(Task.CompletedTask as Task<Response<ListBreweriesOutput>>).Verifiable();
 
             // Act
             _viewModel.Appearing();
@@ -43,20 +47,26 @@ namespace Brewery.Core.Tests.ViewModels
             // Assert
             _mockBreweryService.Verify(service => service.LoadBreweries(), Times.Once);
         }
-
+        
         [TestMethod]
         public async Task ShouldInvoke_ShowHome_AfterDelay()
         {
             // Arrange
-            bool eventInvoked = false;
-            _viewModel.ShowHome += (sender, args) => eventInvoked = true;
+            _mockBreweryService.Setup(x => x.LoadBreweries())
+                .ReturnsAsync(() =>
+                {
+                    return new Response<ListBreweriesOutput>(true, new ListBreweriesOutput(""), "");
+                });
+
+            bool eventWasRaised = false;
+            _viewModel.ShowHome += (sender, args) => eventWasRaised = true;
 
             // Act
             _viewModel.Appearing();
-            await Task.Delay(5000); 
+            await Task.Delay(5000);
 
             // Assert
-            Assert.IsTrue(eventInvoked);
+            Assert.IsTrue(eventWasRaised);
         }
     }
 }

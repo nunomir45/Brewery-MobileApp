@@ -3,6 +3,8 @@ using Android.Util;
 using AndroidX.Lifecycle;
 using Autofac;
 using Brewery.Core;
+using Brewery.Core.Services.Interfaces.CrossPlatform;
+using Brewery.Droid.Services;
 using Plugin.CurrentActivity;
 
 namespace Brewery.Droid;
@@ -30,6 +32,7 @@ public class Application : Android.App.Application, ILifecycleObserver
     {
         App = new App();
         var builder = App.StartRegistration();
+        
 #if DEBUG
         Log.WriteLine(LogPriority.Info, "ApplicationSetup", "Start ApplicationSetup");
 #endif
@@ -42,14 +45,11 @@ public class Application : Android.App.Application, ILifecycleObserver
     //Register Platform specific files here
 	private void PlatformServiceRegistration(ContainerBuilder builder)
 	{
-		//Register services here
-		//builder.RegisterType<MediaService>().As<IMediaService>();
-		//builder.RegisterType<DocumentService>().As<IDocumentService>().SingleInstance();
+		builder.RegisterType<DialogService>().As<IDialogService>().SingleInstance();
 	}
 	
 	public override void OnTerminate()
 	{
 		base.OnTerminate();
 	}
-	
 }

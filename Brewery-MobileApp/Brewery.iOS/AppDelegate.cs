@@ -1,5 +1,7 @@
 using Autofac;
 using Brewery.Core;
+using Brewery.Core.Services.Interfaces.CrossPlatform;
+using Brewery.iOS.Services;
 using Brewery.iOS.UI.ViewControllers;
 
 namespace Brewery.iOS;
@@ -15,7 +17,7 @@ public class AppDelegate : UIApplicationDelegate
     {
         ApplicationSetup();
         
-        // create a new window instance based on the screen size
+        // Create a new window instance based on the screen size
         Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
         Window = new UIWindow(frame: UIScreen.MainScreen.Bounds)
@@ -31,9 +33,8 @@ public class AppDelegate : UIApplicationDelegate
         Window.MakeKeyAndVisible();
         Window.RootViewController = navigationController;
         
-        // make the window visible
+        // Make the window visible
         Window.MakeKeyAndVisible ();
-
 
         return true;
     }
@@ -46,8 +47,9 @@ public class AppDelegate : UIApplicationDelegate
         App.FinishRegistration(builder);
     }
     
-    //Register Platform specific services here
+    // Register Platform specific services here
     private void PlatformServiceRegistration(ContainerBuilder builder)
     {
+        builder.RegisterType<DialogService>().As<IDialogService>();
     }
 }

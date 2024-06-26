@@ -4,6 +4,7 @@ using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.WebService;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
+using Newtonsoft.Json;
 
 namespace Brewery.Core.Services.Implementations.Business
 {
@@ -26,17 +27,20 @@ namespace Brewery.Core.Services.Implementations.Business
 			}
 		}
 
-		public async Task LoadBreweries()
+		public async Task<Response<ListBreweriesOutput>> LoadBreweries()
 		{
+			Response<ListBreweriesOutput> response = null;
 			try
 			{
-				var response = await _listBreweriesRequest.SendAsync(new ListBreweriesInput());
+				response = await _listBreweriesRequest.SendAsync(new ListBreweriesInput());
 				_breweriesList = new List<Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(response.Data.DataList);
 			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e.StackTrace);
 			}
+			
+			return response;
 		}
 		
 		#region GetsAndSets
