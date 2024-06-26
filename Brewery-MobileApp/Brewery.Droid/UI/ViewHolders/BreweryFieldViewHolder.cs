@@ -1,4 +1,3 @@
-using Android.Text;
 using Android.Views;
 using AndroidX.RecyclerView.Widget;
 using Brewery.Core.Helpers;

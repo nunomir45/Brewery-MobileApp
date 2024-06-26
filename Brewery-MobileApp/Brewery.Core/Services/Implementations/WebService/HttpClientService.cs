@@ -1,11 +1,8 @@
-
 using System.Diagnostics;
-using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Brewery.Core.Constants;
 using Brewery.Core.Services.Interfaces.WebService;
-using ModernHttpClient;
 
 namespace Brewery.Core.Services.Implementations.WebService;
 

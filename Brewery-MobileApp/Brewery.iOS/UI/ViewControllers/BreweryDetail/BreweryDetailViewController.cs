@@ -29,6 +29,8 @@ public partial class BreweryDetailViewController : BaseViewController<BreweryDet
     {
 
     }
+    
+    #region UI
 
     private void SetUI()
     {
@@ -36,6 +38,10 @@ public partial class BreweryDetailViewController : BaseViewController<BreweryDet
         TableView.DataSource = this;
         TableView.Delegate = this;
     }
+    
+    #endregion
+    
+    #region TableView
 
     public IntPtr RowsInSection(UITableView tableView, IntPtr section)
     {
@@ -49,4 +55,6 @@ public partial class BreweryDetailViewController : BaseViewController<BreweryDet
         breweryCell.Configure(breweryItem.Key, breweryItem.Value);
         return breweryCell;
     }
+    
+    #endregion
 }

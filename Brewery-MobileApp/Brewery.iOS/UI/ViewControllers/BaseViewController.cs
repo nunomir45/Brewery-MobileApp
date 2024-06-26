@@ -9,9 +9,6 @@ public abstract class BaseViewController<T> : BaseViewController where T : BaseV
     {
         public T _viewModel { get; private set; }
 
-        public BaseViewController()
-        { }
-
         public BaseViewController(IntPtr handle) : base(handle)
         { }
 
@@ -20,25 +17,14 @@ public abstract class BaseViewController<T> : BaseViewController where T : BaseV
             _viewModel = App.Container.Resolve<T>();
             return new[] { _viewModel };
         }
-
     }
 
     public abstract partial class BaseViewController : UIViewController
     {
         private List<BaseViewModel> _viewModels { get; } = new List<BaseViewModel>();
-        //public StatusBarBackground StatusBar { get; set; }
-        //private LoadingView _loadingView { get; set; }
-       
-
-        public BaseViewController()
-        { }
-
-        public BaseViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
-        { }
 
         public BaseViewController(IntPtr handle) : base(handle)
         { }
-
 
         public override void ViewDidLoad()
         {
@@ -136,19 +122,6 @@ public abstract class BaseViewController<T> : BaseViewController where T : BaseV
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            BeginInvokeOnMainThread(() =>
-            {
-                var vm = (BaseViewModel)sender;
-                if (e.PropertyName != nameof(vm.IsBusy)) return;
-                if (vm.IsBusy)
-                {
-                    //_loadingView.Show(this.View);
-                }
-                else
-                {
-                    //_loadingView.Hide();
-                }
-            });
         }
 
         protected void PushViewController(string storyboardString, string viewControllerName)

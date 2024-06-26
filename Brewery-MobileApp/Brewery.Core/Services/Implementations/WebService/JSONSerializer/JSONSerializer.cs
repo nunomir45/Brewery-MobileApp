@@ -9,7 +9,6 @@ public class JSONSerializer : ISerializer
 
     public async Task<HttpContent> SerializeAsync<TObject>(TObject content)
     {
-
         HttpContent httpContent = null;
         var jsonSerializerSettings = new JsonSerializerSettings
         {

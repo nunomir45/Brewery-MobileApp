@@ -25,5 +25,4 @@ public class BreweryViewHolder : RecyclerView.ViewHolder
     {
         _titleTv.Text = text;
     }
-
 }

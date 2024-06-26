@@ -42,7 +42,7 @@ public class Application : Android.App.Application, ILifecycleObserver
         App.FinishRegistration(builder);
     }
     
-    //Register Platform specific files here
+    // Register Platform specific files here
 	private void PlatformServiceRegistration(ContainerBuilder builder)
 	{
 		builder.RegisterType<DialogService>().As<IDialogService>().SingleInstance();

@@ -1,8 +1,5 @@
-using System;
 using Brewery.Core.ViewModels;
 using Brewery.iOS.UI.ViewControllers.Home;
-using UIKit;
-using Foundation;
 using ObjCRuntime;
 
 namespace Brewery.iOS.UI.ViewControllers.Splash;

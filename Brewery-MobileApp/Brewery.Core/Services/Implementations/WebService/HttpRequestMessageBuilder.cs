@@ -18,6 +18,14 @@ public class HttpRequestMessageBuilder : IHttpRequestMessageBuilder
             Content = content,
         };
         
+        if (requestHeaders != null)
+        {
+            foreach (var header in requestHeaders)
+            {
+                requestMessage.Headers.Add(header.Key, header.Value);
+            }
+        }
+        
         return requestMessage;
     }
 

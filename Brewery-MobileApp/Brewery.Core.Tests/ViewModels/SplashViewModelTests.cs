@@ -1,12 +1,9 @@
-using System;
-using System.Threading.Tasks;
 using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.CrossPlatform;
 using Brewery.Core.Services.Interfaces.WebService;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 using Brewery.Core.ViewModels;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 namespace Brewery.Core.Tests.ViewModels

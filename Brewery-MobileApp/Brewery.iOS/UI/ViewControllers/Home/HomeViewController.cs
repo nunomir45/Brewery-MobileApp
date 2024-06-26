@@ -61,6 +61,39 @@ public partial class HomeViewController : BaseViewController<HomeViewModel>, IUI
 
     #endregion
 
+    #region Events
+
+    private void ShowBreweryDetail(object? sender, EventArgs e)
+    {
+        PushViewController("BreweryDetail", nameof(BreweryDetailViewController));
+    }
+    
+    private void SearchBarOnTextChanged(object? sender, UISearchBarTextChangedEventArgs e)
+    {
+        var searchText = e.SearchText?.ToLower();
+        
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            _viewModel.BreweriesFilteredList = new List<Core.Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_viewModel.BreweriesList);
+        }
+        else
+        {
+            _viewModel.BreweriesFilteredList = _viewModel.BreweriesList.Where(item => item.Name.ToLower().Contains(searchText) || item.Name.ToLower().Contains(searchText)).ToList();
+        }
+        
+        TableView.ReloadData();
+    }
+    
+    private void ViewModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(_viewModel.BreweriesList))
+        {
+            UpdateTable();
+        }
+    }
+
+    #endregion
+    
     #region TableView
 
     public IntPtr RowsInSection(UITableView tableView, IntPtr section)
@@ -105,36 +138,5 @@ public partial class HomeViewController : BaseViewController<HomeViewModel>, IUI
 
     #endregion
     
-    #region Events
-
-    private void ShowBreweryDetail(object? sender, EventArgs e)
-    {
-        PushViewController("BreweryDetail", nameof(BreweryDetailViewController));
-    }
-    
-    private void SearchBarOnTextChanged(object? sender, UISearchBarTextChangedEventArgs e)
-    {
-        var searchText = e.SearchText?.ToLower();
-        
-        if (string.IsNullOrWhiteSpace(searchText))
-        {
-            _viewModel.BreweriesFilteredList = new List<Core.Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_viewModel.BreweriesList);
-        }
-        else
-        {
-            _viewModel.BreweriesFilteredList = _viewModel.BreweriesList.Where(item => item.Name.ToLower().Contains(searchText) || item.Name.ToLower().Contains(searchText)).ToList();
-        }
-        
-        TableView.ReloadData();
-    }
-    
-    private void ViewModelOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(_viewModel.BreweriesList))
-        {
-            UpdateTable();
-        }
-    }
-
-    #endregion
+   
 }

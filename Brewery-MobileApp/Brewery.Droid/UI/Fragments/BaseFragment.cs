@@ -19,7 +19,6 @@ public abstract class BaseFragment : AndroidX.Fragment.App.Fragment
         {
             vm.Appearing();
             vm.PropertyChanged += OnPropertyChanged;
-            UpdateIsBusy(vm);
         }
 
         SetupBindings();
@@ -48,33 +47,6 @@ public abstract class BaseFragment : AndroidX.Fragment.App.Fragment
     
     public void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        switch (e.PropertyName)
-        {
-            case nameof(BaseViewModel.IsBusy):
-                var vm = sender as BaseViewModel;
-                UpdateIsBusy(vm);
-                break;
-            default:
-                break;
-        }
-    }
-    
-    private void UpdateIsBusy(BaseViewModel vm)
-    {
-        if (vm.IsBusy)
-            ShowProgressDialog();
-        else
-            DismissProgressDialog();
-    }
-    
-    public void ShowProgressDialog()
-    {
-        
-    }
-
-    public void DismissProgressDialog()
-    {
-       
     }
     
     #region ViewModels 

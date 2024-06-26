@@ -29,7 +29,6 @@ public partial class BreweryFieldCell : UITableViewCell
 			
 			Value.AddGestureRecognizer(new UITapGestureRecognizer(() =>
 			{
-				//WebviewHelper.OpenUri(Value.Text);
 				var url = new NSUrl(Value.Text);
 				
 				if (UIApplication.SharedApplication.CanOpenUrl(url))

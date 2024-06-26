@@ -47,13 +47,28 @@ public class SplashFragment : BaseFragment
 
     protected override void SetupBindings()
     {
-        _viewModel.ShowHome += ShowHome;
+        if (_viewModel != null)
+        {
+            _viewModel.ShowHome += ShowHome;
+        }
     }
 
     protected override void CleanupBindings()
     {
-        _viewModel.ShowHome -= ShowHome;
+        if (_viewModel != null)
+        {
+            _viewModel.ShowHome -= ShowHome;
+        }
     }
+    
+    #region UI
+
+    private void SetupUI()
+    {
+        _titleTv.Text = _viewModel.Title;
+    }
+    
+    #endregion
 
     #region Events
 
@@ -63,14 +78,5 @@ public class SplashFragment : BaseFragment
         this.ShowNewFragment(homeFragment);
     }
 
-    #endregion
-    
-    #region UI
-
-    private void SetupUI()
-    {
-        _titleTv.Text = _viewModel.Title;
-    }
-    
     #endregion
 }

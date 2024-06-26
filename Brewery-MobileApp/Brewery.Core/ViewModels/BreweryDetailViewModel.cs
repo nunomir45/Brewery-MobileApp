@@ -29,11 +29,13 @@ public class BreweryDetailViewModel : BaseViewModel
         
         // Get all properties of Brewery
         PropertyInfo[] properties = typeof(Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        if (properties == null || properties.Length == 0) return;
         
         foreach (var property in properties)
         {
             var brewerySelected = _breweryService.GetBrewerySelected();
-            // Get propertie value
+            // Get property value
             var value = property.GetValue(brewerySelected);
 
             if (value != null)

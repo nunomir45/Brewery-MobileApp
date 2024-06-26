@@ -48,9 +48,9 @@ public class HomeFragment : BaseFragment
         
         _searchView.QueryTextChange += SearchViewOnQueryTextChange;
         
-        _activity.SetToolbarTitle(_viewModel.Title);
-        _activity.SetToolbarBack(false);
-        _activity.ShowToolbar();
+        _activity?.SetToolbarTitle(_viewModel.Title);
+        _activity?.SetToolbarBack(false);
+        _activity?.ShowToolbar();
     }
 
     protected override void CleanupBindings()
@@ -84,8 +84,7 @@ public class HomeFragment : BaseFragment
     }
     
     #endregion
-
-
+    
     #region Events
 
     private void ItemClick(int position)

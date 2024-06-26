@@ -39,15 +39,21 @@ public class BreweryDetailFragment : BaseFragment
     
     protected override void SetupBindings()
     {
-        _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
-        _viewModel.RaisePropertyChanged(nameof(_viewModel.BreweryFields));
+        if (_viewModel != null)
+        {
+            _viewModel.PropertyChanged += ViewModelOnPropertyChanged;
+            _viewModel.RaisePropertyChanged(nameof(_viewModel.BreweryFields));
+        }
         
         _activity?.SetToolbarBack(true);
     }
 
     protected override void CleanupBindings()
     {
-        _viewModel.PropertyChanged -= ViewModelOnPropertyChanged;
+        if (_viewModel != null)
+        {
+            _viewModel.PropertyChanged -= ViewModelOnPropertyChanged;
+        }
         
         _activity?.SetToolbarBack(false);
     }

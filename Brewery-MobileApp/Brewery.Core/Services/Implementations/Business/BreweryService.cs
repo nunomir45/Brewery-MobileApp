@@ -4,7 +4,6 @@ using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.WebService;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
-using Newtonsoft.Json;
 
 namespace Brewery.Core.Services.Implementations.Business
 {

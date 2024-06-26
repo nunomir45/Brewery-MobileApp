@@ -1,7 +1,6 @@
 using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.CrossPlatform;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
-using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 
 namespace Brewery.Core.ViewModels;
 
@@ -48,7 +47,7 @@ public class SplashViewModel : BaseViewModel
             }
             else
             {
-                await _dialogService.ShowAlertAsync("Aconteceu algo inesperado a carregar os dados", response?.Data?.Message, "voltar a tentar", ()=> LoadBreweries());
+                await _dialogService.ShowAlertAsync("Something unexpected happened loading the data", response?.Data?.Message, "try again", ()=> LoadBreweries());
             }
         }
         catch (Exception e)
