@@ -12,17 +12,20 @@ namespace Brewery.Core.Services.Implementations.Business
 		private readonly IListBreweriesRequest _listBreweriesRequest;
 		private List<DTOs.Brewery> _breweriesList;
 		private DTOs.Brewery _brewerySelected;
+		
+		public List<DTOs.Brewery> GetBreweriesList => _breweriesList;
+		public DTOs.Brewery GetBrewerySelected => _brewerySelected;
 
 		public BreweryService(IListBreweriesRequest listBreweriesRequest)
 		{
 			_listBreweriesRequest = listBreweriesRequest;
 		}
-		
-		public void SelectBrewery(int position)
+
+		public void SelectBrewery(Guid id)
 		{
-			if (position < _breweriesList?.Count())
+			if (_breweriesList?.Count > 0)
 			{
-				_brewerySelected = _breweriesList[position];
+				_brewerySelected = _breweriesList.FirstOrDefault(x => x.Id == id);
 			}
 		}
 
@@ -32,29 +35,15 @@ namespace Brewery.Core.Services.Implementations.Business
 			try
 			{
 				response = await _listBreweriesRequest.SendAsync(new ListBreweriesInput());
-				_breweriesList = new List<Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(response.Data.DataList);
+				_breweriesList = new List<DTOs.Brewery>(response.Data.DataList);
 			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e.StackTrace);
 			}
-			
+
 			return response;
 		}
-		
-		#region GetsAndSets
-		
-		public List<DTOs.Brewery> GetBreweriesList()
-		{
-			return _breweriesList;
-		}
-
-		public DTOs.Brewery GetBrewerySelected()
-		{
-			return _brewerySelected;
-		} 
-		
-		#endregion
 	}
 }
 

@@ -9,7 +9,7 @@ namespace Brewery.Core.Services.Implementations.WebService.BreweryWebServices;
 
 public class ListBreweriesRequest : BaseRequest<ListBreweriesInput, ListBreweriesOutput>, IListBreweriesRequest
 {
-    public ListBreweriesRequest(IWebServiceRequester requester, ISerializer serializer, IDeserializer deserializer, IHttpClientService hpptClientService, IHttpRequestMessageBuilder httpRequestMessageBuilder, IReachabilityService reachabilityService) : base(requester, deserializer, hpptClientService, serializer, reachabilityService, httpRequestMessageBuilder)
+    public ListBreweriesRequest(IWebServiceRequester requester, ISerializer serializer, IDeserializer deserializer, IHttpClientService httpClientService, IHttpRequestMessageBuilder httpRequestMessageBuilder, IReachabilityService reachabilityService) : base(requester, deserializer, httpClientService, serializer, reachabilityService, httpRequestMessageBuilder)
     {
     }
 

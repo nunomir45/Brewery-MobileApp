@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Brewery.Core.Constants;
+using Brewery.Core.Resources;
 using Brewery.Core.Services.Interfaces.CrossPlatform;
 using Brewery.Core.Services.Interfaces.WebService;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
@@ -50,7 +51,7 @@ public abstract class BaseRequest<TInput, TOutput>
             
             if (!hasInternetConnection)
             {
-                return new Response<TOutput>(false, null, new Error("Por favor conecte-se à internet."));
+                return new Response<TOutput>(false, null, new Error(BreweryDictionary.Request_NoInternetConnection));
             }
             
             HttpContent content = null;
@@ -74,7 +75,7 @@ public abstract class BaseRequest<TInput, TOutput>
         {
             Debug.WriteLine(ex.StackTrace);
 
-            return new Response<TOutput>("No endpoint connection");
+            return new Response<TOutput>(BreweryDictionary.Request_NoEndpointConnection);
         }
     }
     

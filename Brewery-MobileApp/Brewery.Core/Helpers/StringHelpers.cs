@@ -6,7 +6,7 @@ public static class StringHelpers
 {
     public static bool IsUrl(this string input)
     {
-        string pattern = @"^(http|https|ftp):\/\/[^\s/$.?#].[^\s]*$";
+        string pattern = @"^(http|https):\/\/[^\s/$.?#].[^\s]*$";
         Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
         return regex.IsMatch(input);
     }

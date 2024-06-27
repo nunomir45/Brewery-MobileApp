@@ -24,7 +24,7 @@ public class WebServiceRequester : IWebServiceRequester
                 Debug.WriteLine("Response:");
                 Debug.WriteLine(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
 
-                response.EnsureSuccessStatusCode(); // throws an exception if the status code is unsuccessfull
+                response.EnsureSuccessStatusCode(); // throws an exception if the status code is unsuccessful
                     
                 if (response.IsSuccessStatusCode)
                 {

@@ -1,3 +1,4 @@
+using Brewery.Core.Resources;
 using DTOs = Brewery.Core.Services.Interfaces.WebService.BreweryWebServices.DTOs;
 using Brewery.Core.Services.Interfaces.Business;
 
@@ -13,7 +14,7 @@ public class HomeViewModel : BaseViewModel
     {
         _breweryService = breweryService;
 
-        Title = "Breweries list";
+        Title = BreweryDictionary.HomeViewModel_Title_text;
         
         LoadData();
     }
@@ -22,8 +23,8 @@ public class HomeViewModel : BaseViewModel
 
     public string Title { get; set; }
 
-    public List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery> BreweriesList { get;set; }
-    public List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery> BreweriesFilteredList { get;set; }
+    public List<DTOs.Brewery> BreweriesList { get;set; }
+    public List<DTOs.Brewery> BreweriesFilteredList { get;set; }
 
     #endregion
     
@@ -37,18 +38,39 @@ public class HomeViewModel : BaseViewModel
 
     public void SelectBrewery(int position)
     {
-        _breweryService.SelectBrewery(position);
+        if (position < BreweriesFilteredList?.Count)
+        {
+            _breweryService.SelectBrewery(BreweriesFilteredList[position].Id);
+        }
         
-        if (_breweryService.GetBrewerySelected() != null)
+        if (_breweryService.GetBrewerySelected != null)
         {
             ShowBreweryDetail?.Invoke(null, EventArgs.Empty);
         }
     }
+
+    public void FilterBreweriesList(string searchText)
+    {
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            BreweriesFilteredList = BreweriesList;
+        }
+        else
+        {
+            BreweriesFilteredList = BreweriesList.Where(item => item.Name.ToLower().Contains(searchText) || item.Name.ToLower().Contains(searchText)).ToList();
+        }
+        
+        RaisePropertyChanged(nameof(BreweriesFilteredList));
+    }
     
     private void LoadData()
     {
-        var breweriesList = _breweryService.GetBreweriesList() ?? new List<Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>();
+        var breweriesList = _breweryService.GetBreweriesList ?? new List<DTOs.Brewery>();
         BreweriesList = new List<DTOs.Brewery>(breweriesList);
-        BreweriesFilteredList = new List<DTOs.Brewery>(breweriesList);
+
+        if(BreweriesFilteredList == null)
+        {
+            BreweriesFilteredList = new List<DTOs.Brewery>(breweriesList);
+        }
     }
 }

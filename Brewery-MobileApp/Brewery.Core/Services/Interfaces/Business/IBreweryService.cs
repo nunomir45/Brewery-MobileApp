@@ -5,12 +5,12 @@ namespace Brewery.Core.Services.Interfaces.Business
 {
 	public interface IBreweryService
 	{
-		void SelectBrewery(int position);
+		void SelectBrewery(Guid id);
 		Task<Response<DTOs.ListBreweriesOutput>> LoadBreweries();
 
-		List<DTOs.Brewery> GetBreweriesList();
+		List<DTOs.Brewery> GetBreweriesList { get; }
 
-		DTOs.Brewery GetBrewerySelected();
+		DTOs.Brewery GetBrewerySelected { get; }
 	}
 }
 

@@ -7,7 +7,7 @@ namespace Brewery.Droid.UI.Adapters;
 public class BreweryDetailRecyclerViewAdapter : RecyclerView.Adapter
 {
     public Dictionary<string, string> BreweryFields { get; set; }
-    public override int ItemCount => BreweryFields?.Count() ?? 0;
+    public override int ItemCount => BreweryFields?.Count ?? 0;
     
     public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
     {

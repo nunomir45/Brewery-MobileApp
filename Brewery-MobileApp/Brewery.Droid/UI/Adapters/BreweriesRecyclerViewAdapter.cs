@@ -7,7 +7,7 @@ namespace Brewery.Droid.UI.Adapters;
 public class BreweriesRecyclerViewAdapter : RecyclerView.Adapter
 {
     public List<Core.Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery> Breweries { get; set; }
-    public override int ItemCount => Breweries?.Count() ?? 0;
+    public override int ItemCount => Breweries?.Count ?? 0;
     public Action<int> ItemClick { get; set; }
     
     public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)

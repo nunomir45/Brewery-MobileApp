@@ -9,6 +9,11 @@
     <ItemGroup>
       <Compile Remove="Class1.cs" />
       <Compile Remove="Services\Implementations\WebService\Security\**" />
+      <Compile Update="Resources\BreweryDictionary.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>BreweryDictionary.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +27,10 @@
 
     <ItemGroup>
       <EmbeddedResource Remove="Services\Implementations\WebService\Security\**" />
+      <EmbeddedResource Update="Resources\BreweryDictionary.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>BreweryDictionary.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>

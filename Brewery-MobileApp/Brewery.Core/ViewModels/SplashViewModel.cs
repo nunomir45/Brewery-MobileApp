@@ -1,3 +1,4 @@
+using Brewery.Core.Resources;
 using Brewery.Core.Services.Interfaces.Business;
 using Brewery.Core.Services.Interfaces.CrossPlatform;
 using Brewery.Core.Services.Interfaces.WebService.BreweryWebServices;
@@ -15,8 +16,8 @@ public class SplashViewModel : BaseViewModel
         _listBreweriesRequest = listBreweriesRequest;
         _breweryService = breweryService;
         _dialogService = dialogService;
-        
-        Title = "Welcome to the Brewery App!";
+
+        Title = BreweryDictionary.SplashViewModel_Title_Text;
     }
 
     #region Bindings
@@ -47,7 +48,7 @@ public class SplashViewModel : BaseViewModel
             }
             else
             {
-                await _dialogService.ShowAlertAsync("Something unexpected happened loading the data", response?.Data?.Message, "try again", ()=> LoadBreweries());
+                await _dialogService.ShowAlertAsync(BreweryDictionary.SplashViewModel_ErrorLoadingDataDialog_TitleText, response?.Data?.Message, BreweryDictionary.SplashViewModel_Error_LoadingDataDialog_ButtonText, async ()=> await LoadBreweries());
             }
         }
         catch (Exception e)

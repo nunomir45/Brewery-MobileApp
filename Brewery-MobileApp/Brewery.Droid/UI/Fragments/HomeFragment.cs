@@ -74,7 +74,7 @@ public class HomeFragment : BaseFragment
             _breweriesRecyclerView.SetLayoutManager(_layoutManager);
             _breweriesRecyclerViewAdapter = new BreweriesRecyclerViewAdapter();
             _breweriesRecyclerViewAdapter.ItemClick = ItemClick;
-            _breweriesRecyclerViewAdapter.Breweries = new List<Core.Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_viewModel.BreweriesList);
+            _breweriesRecyclerViewAdapter.Breweries = new List<Core.Services.Interfaces.WebService.BreweryWebServices.DTOs.Brewery>(_viewModel.BreweriesFilteredList);
 
             _breweriesRecyclerView.SetAdapter(_breweriesRecyclerViewAdapter);
             _breweriesRecyclerViewAdapter.NotifyDataSetChanged();
@@ -106,21 +106,22 @@ public class HomeFragment : BaseFragment
             {
                 SetBreweriesRecyclerView();
             }
+            else if (e.PropertyName == nameof(_viewModel.BreweriesFilteredList))
+            {
+                UpdateRecylerAdapter();
+            }
         });
     }
     
     private void SearchViewOnQueryTextChange(object? sender, SearchView.QueryTextChangeEventArgs e)
     {
         var searchText = e.NewText?.ToLower();
-        if (string.IsNullOrWhiteSpace(searchText))
-        {
-            _viewModel.BreweriesFilteredList = _viewModel.BreweriesList;
-        }
-        else
-        {
-            _viewModel.BreweriesFilteredList = _viewModel.BreweriesList.Where(item => item.Name.ToLower().Contains(searchText) || item.Name.ToLower().Contains(searchText)).ToList();
-        }
         
+        _viewModel.FilterBreweriesList(searchText);
+    }
+
+    private void UpdateRecylerAdapter()
+    {
         _breweriesRecyclerViewAdapter.Breweries = _viewModel.BreweriesFilteredList;
         _breweriesRecyclerViewAdapter.NotifyDataSetChanged();
     }
