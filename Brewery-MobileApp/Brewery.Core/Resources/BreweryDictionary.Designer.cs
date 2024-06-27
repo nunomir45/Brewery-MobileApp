@@ -80,5 +80,77 @@ namespace Brewery.Core.Resources {
                 return ResourceManager.GetString("HomeViewModel_Title_text", resourceCulture);
             }
         }
+        
+        internal static string BreweryDetailViewModel_Brewery_Name_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Name_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_Type_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Type_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_Address_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Address_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_City_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_City_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_State_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_State_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_PostalCode_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_PostalCode_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_Longitude_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Longitude_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_Latitude_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Latitude_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_Phone_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Phone_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_Website_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Website_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_StateProvince_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_StateProvince_Text", resourceCulture);
+            }
+        }
+        
+        internal static string BreweryDetailViewModel_Brewery_Street_Text {
+            get {
+                return ResourceManager.GetString("BreweryDetailViewModel_Brewery_Street_Text", resourceCulture);
+            }
+        }
     }
 }
