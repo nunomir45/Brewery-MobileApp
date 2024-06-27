@@ -13,16 +13,6 @@ public class Response
     public bool Successful { get; private set; }
 
     public Error Error { get; private set; }
-
-    public bool? _successStatusCode;
-    public bool SuccessStatusCode
-    {
-        get => _successStatusCode ?? Successful;
-        private set
-        {
-            _successStatusCode = value;
-        }
-    }
 }
 
 public class Response<TObject> : Response

@@ -87,7 +87,7 @@ public abstract class BaseRequest<TInput, TOutput>
     {
         try
         {
-            AsyncRetryPolicy<Response<TOutput>> retryPolicyNeedsTrueResponse = Policy.HandleResult<Response<TOutput>>(b => !b.Successful && !b.SuccessStatusCode).RetryAsync(retries);
+            AsyncRetryPolicy<Response<TOutput>> retryPolicyNeedsTrueResponse = Policy.HandleResult<Response<TOutput>>(b => !b.Successful).RetryAsync(retries);
 
             return await retryPolicyNeedsTrueResponse.ExecuteAsync(async () =>
             {
