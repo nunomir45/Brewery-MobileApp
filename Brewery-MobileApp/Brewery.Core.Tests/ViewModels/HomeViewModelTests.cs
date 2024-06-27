@@ -30,7 +30,7 @@ namespace Brewery.Core.Tests.ViewModels;
         {
             // Arrange
             var breweries = new List<DTOs.Brewery> { new DTOs.Brewery { Name = "Brewery1" }, new DTOs.Brewery { Name = "Brewery2" } };
-            _mockBreweryService.Setup(service => service.GetBreweriesList()).Returns(breweries);
+            _mockBreweryService.Setup(service => service.GetBreweriesList).Returns(breweries);
 
             // Act
             _viewModel = new HomeViewModel(_mockBreweryService.Object);
@@ -48,7 +48,7 @@ namespace Brewery.Core.Tests.ViewModels;
             _viewModel.ShowBreweryDetail += (sender, args) => eventInvoked = true;
 
             var selectedBrewery = new DTOs.Brewery { Name = "BrewerySelected" };
-            _mockBreweryService.Setup(service => service.GetBrewerySelected()).Returns(selectedBrewery);
+            _mockBreweryService.Setup(service => service.GetBrewerySelected).Returns(selectedBrewery);
 
             // Act
             _viewModel.SelectBrewery(0);
@@ -64,7 +64,7 @@ namespace Brewery.Core.Tests.ViewModels;
             bool eventInvoked = false;
             _viewModel.ShowBreweryDetail += (sender, args) => eventInvoked = true;
 
-            _mockBreweryService.Setup(service => service.GetBrewerySelected()).Returns((DTOs.Brewery)null);
+            _mockBreweryService.Setup(service => service.GetBrewerySelected).Returns((DTOs.Brewery)null);
 
             // Act
             _viewModel.SelectBrewery(0);

@@ -33,7 +33,7 @@ public class BreweryServiceTests
         await _breweryService.LoadBreweries();
 
         // Assert
-        var breweriesList = _breweryService.GetBreweriesList();
+        var breweriesList = _breweryService.GetBreweriesList;
         Assert.IsNotNull(breweriesList);
     }
 
@@ -45,7 +45,7 @@ public class BreweryServiceTests
         typeof(BreweryService).GetField("_brewerySelected", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?.SetValue(_breweryService, brewery);
 
         // Act
-        var selectedBrewery = _breweryService.GetBrewerySelected();
+        var selectedBrewery = _breweryService.GetBrewerySelected;
 
         // Assert
         Assert.IsNotNull(selectedBrewery);

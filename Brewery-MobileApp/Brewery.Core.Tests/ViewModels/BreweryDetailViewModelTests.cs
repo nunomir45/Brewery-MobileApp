@@ -14,7 +14,7 @@ public class BreweryDetailViewModelTests
         // Arrange
         var breweryServiceMock = new Mock<IBreweryService>();
         var brewerySelected = new DTOs.Brewery { Name = "brewery"};
-        breweryServiceMock.Setup(s => s.GetBrewerySelected()).Returns(brewerySelected);
+        breweryServiceMock.Setup(s => s.GetBrewerySelected).Returns(brewerySelected);
 
         // Act
         var viewModel = new BreweryDetailViewModel(breweryServiceMock.Object);
