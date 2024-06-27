@@ -6,16 +6,6 @@ namespace Brewery.Droid.Helpers;
 
 public static class FragmentHelper
 {
-    public static void ShowNewFragment(Fragment newFrag, bool addToBackStack = false, bool addToView = false, string tag = null)
-    {
-        var activity = CrossCurrentActivity.Current.Activity as AppCompatActivity;
-        if (activity != null)
-        {
-            var currentfragment = activity.SupportFragmentManager.FindFragmentById(Resource.Id.fragment_container);
-            currentfragment.ShowNewFragment(newFrag, addToBackStack, addToView, tag);
-        }
-    }
-    
     public static void ShowNewFragment(this Fragment fragment, Fragment newFrag, bool addToBackStack = false, bool addToView = false, string tag = null)
     {
 #if DEBUG
